@@ -1,4 +1,4 @@
-package controle.almoco.entity;
+package controle.almoco.model;
 
 import java.io.Serializable;
 import java.util.List;

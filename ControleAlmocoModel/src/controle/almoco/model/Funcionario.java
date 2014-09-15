@@ -1,7 +1,6 @@
-package controle.almoco.entity;
+package controle.almoco.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -39,10 +38,9 @@ public class Funcionario implements Serializable{
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_LOTACAO", referencedColumnName="ID_LOTACAO")
 	private Lotacao lotacao;
-	
 	
 	public Integer getId() {
 		return id;
