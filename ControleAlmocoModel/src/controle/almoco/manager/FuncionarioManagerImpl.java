@@ -1,5 +1,7 @@
 package controle.almoco.manager;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -16,6 +18,11 @@ public class FuncionarioManagerImpl implements FuncionarioManager{
 	public void save(Funcionario funcionario) {
 		funcionarioDAO.save(funcionario);
 		
+	}
+
+	@Override
+	public List<Funcionario> findAll() {
+		return funcionarioDAO.findAll();
 	}
 
 }

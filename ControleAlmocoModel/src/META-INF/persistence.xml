@@ -9,7 +9,7 @@
 		<class>controle.almoco.model.Funcionario</class>
 		<class>controle.almoco.model.Cozinha</class>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_coments" value="false" />

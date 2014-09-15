@@ -78,4 +78,5 @@ public abstract class GenericDAOImpl<T> implements GenericDAO{
             query.setParameter(entry.getKey(), entry.getValue());
         }
     }
+    
 }
