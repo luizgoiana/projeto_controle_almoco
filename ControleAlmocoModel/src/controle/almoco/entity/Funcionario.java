@@ -1,5 +1,77 @@
 package controle.almoco.entity;
 
-public class Funcionario {
+import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="FUNCIONARIO")
+public class Funcionario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FUNCIONARIO_SEQ")
+	@SequenceGenerator(name = "FUNCIONARIO_SEQ", sequenceName = "FUNCIONARIO_SEQ1", allocationSize = 1)
+	@Column(name = "ID_FUNCIONARIO")
+	private Integer id;
+	
+	@Column(name = "NOME")
+	private String nome;
+	
+	@Column(name = "FUNCAO")
+	private String funcao;
+	
+	@Column(name = "EMAIL")
+	private String email;
+	
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinColumn(name="ID_LOTACAO", referencedColumnName="ID_LOTACAO")
+	private Lotacao lotacao;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getFuncao() {
+		return funcao;
+	}
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Lotacao getLotacao() {
+		return lotacao;
+	}
+	public void setLotacao(Lotacao lotacao) {
+		this.lotacao = lotacao;
+	}
 }
