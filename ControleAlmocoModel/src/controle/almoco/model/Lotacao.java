@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,8 +35,6 @@ public class Lotacao implements Serializable {
 	@JoinColumn(name="ID_COZINHA", referencedColumnName="ID_COZINHA")
 	private Cozinha cozinha;
 	
-	private List<Funcionario> funcionarios;
-	
 	public Integer getId() {
 		return id;
 	}
@@ -49,12 +46,6 @@ public class Lotacao implements Serializable {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-	public void setFuncionarios(List<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
 	}
 	public Cozinha getCozinha() {
 		return cozinha;

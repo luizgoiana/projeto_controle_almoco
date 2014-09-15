@@ -3,12 +3,16 @@ package controle.almoco.controller;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import controle.almoco.manager.FuncionarioManager;
 import controle.almoco.model.Funcionario;
 
+@Named
+@RequestScoped
 public class FuncionarioController {
 
 	@Inject
