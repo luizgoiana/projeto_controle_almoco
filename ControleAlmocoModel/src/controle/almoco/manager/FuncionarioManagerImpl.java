@@ -45,8 +45,8 @@ public class FuncionarioManagerImpl implements FuncionarioManager{
 	}
 
 	@Override
-	public Funcionario update(Funcionario funcionario) throws Exception {
-		return funcionarioDAO.update(funcionario);
+	public void update(Funcionario funcionario) throws Exception {
+		funcionarioDAO.update(funcionario);
 		
 	}
 

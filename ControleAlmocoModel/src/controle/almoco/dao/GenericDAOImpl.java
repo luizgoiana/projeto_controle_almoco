@@ -44,8 +44,10 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T>{
         ut.commit();
     }
  
-    public T update(T entity) throws Exception{
-        return em.merge(entity);
+    public void update(T entity) throws Exception{
+        ut.begin();
+    	em.merge(entity);
+    	ut.commit();
     }
  
     public T find(int entityID) {

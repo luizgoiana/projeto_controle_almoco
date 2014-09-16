@@ -55,6 +55,8 @@ public class FuncionarioController {
     
     public String preparaEditarUsuario(Integer idFuncionario){
     	Funcionario funcionario = funcionarioManager.findFuncionarioById(idFuncionario);
+    	//getContext().getCurrentInstance().getExternalContext().getSession(arg0)
+    	funcionarioForm.setId(funcionario.getId());
     	funcionarioForm.setNome(funcionario.getNome());
     	funcionarioForm.setFuncao(funcionario.getFuncao());
     	funcionarioForm.setEmail(funcionario.getEmail());
@@ -79,15 +81,16 @@ public class FuncionarioController {
     }
     
     public String excluirFuncionario(Integer idFuncionario) throws Exception{
-    	//Funcionario funcionario = funcionarioManager.findFuncionarioById(idFuncionario);
     	
     	funcionarioManager.delete(idFuncionario, Funcionario.class);
     	
-    	return null;
+    	sendInfoMessageToUser("Funcionário Excluído com Sucesso.");
+    	return LISTAR_FUNCIONARIOS;
     }
     
     public Funcionario populaFuncionario(){
     	Funcionario funcionario = new Funcionario();
+    	funcionario.setId(funcionarioForm.getId());
         funcionario.setNome(funcionarioForm.getNome());
         funcionario.setFuncao(funcionarioForm.getFuncao());
         funcionario.setEmail(funcionarioForm.getEmail());

@@ -13,27 +13,27 @@
 .tableFirstLine {
 	text-align: left;
 	background: none repeat scroll 0 0 #F9F9F9;
-	border-top: 1px solid #BBBBBB;
+	border: 1px solid #BBBBBB;
 }
 
 .tableNextLine {
 	text-align: left;
 	background: none repeat scroll 0 0 #FFFFFFF;
-	border-top: 1px solid #BBBBBB;
+	borderp: 1px solid #BBBBBB;
 }
 
 .panelGrid {
-	border: 1px solid;
+	border: 1px solid #BBBBBB;
 }
 
 .panelFirstLine {
 	text-align: center;
-	border-top: 1px solid #BBBBBB;
+	border: 1px solid #BBBBBB;
 }
 
 .panelNextLine {
 	text-align: center;
-	border-top: 1px solid #BBBBBB;
+	border: 1px solid #BBBBBB;
 }
 
 .messageError {
