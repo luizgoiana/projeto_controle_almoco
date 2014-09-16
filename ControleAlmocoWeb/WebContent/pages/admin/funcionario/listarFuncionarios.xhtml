@@ -9,9 +9,10 @@
 </h:head>
 <h:body>
 	<h:form>
+		<div align="center">
 		<h2><h:outputLabel value="#{msgs.listaFuncionarioTitulo}" /></h2>
 	
-		<h:messages />
+		<h:messages style="color:red;"/>
 		<h:dataTable value="#{funcionarioController.allFuncionarios}" var="funcionario" styleClass="table" headerClass="tableColumnsHeader" rowClasses="tableFirstLine,tableNextLine" >
 			<h:column>
 				<f:facet name="header">
@@ -40,17 +41,14 @@
 					<!-- Always save the id as hidden when you use a request scope MB -->
 					<h:inputHidden value="#{funcionario.id}" />
 					
-					<!--<h:commandButton action="#{dogMB.updateDogStart()}" value="#{msgs.update}" rendered="#{userMB.userAdmin}" >
-						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
-					</h:commandButton>
-					<h:commandButton action="#{dogMB.deleteDogStart()}" value="#{msgs.delete}" rendered="#{userMB.userAdmin}" >
-						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
-					</h:commandButton>-->
+					<h:commandButton action="#{funcionarioController.preparaEditarUsuario(funcionario.id)}" value="#{msgs.btnAlterar}" ></h:commandButton>
+					<h:commandButton action="#{funcionarioController.excluirFuncionario(funcionario.id)}" value="#{msgs.btnExcluir}"></h:commandButton>
 				</h:panelGrid>
 			</h:column>
 		</h:dataTable>
 		<!-- This button is displayed to the user, just to you see the error msg  -->
 		<!-- <h:commandButton action="createDog" value="#{msgs.create} #{msgs.dog}" /> -->
+		</div>
 	</h:form>
 </h:body>
 </html>

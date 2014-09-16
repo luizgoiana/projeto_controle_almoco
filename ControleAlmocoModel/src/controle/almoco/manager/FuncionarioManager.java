@@ -13,4 +13,10 @@ public interface FuncionarioManager {
 	public abstract List<Funcionario> findAll();
 	
 	public abstract Funcionario recuperarFuncionarioPorEmail(String email);
+	
+	public abstract Funcionario findFuncionarioById(int idFuncionario);
+	
+	public abstract Funcionario update(Funcionario funcionario) throws Exception;
+	
+	public abstract void delete(Object id, Class<Funcionario> funcionario) throws Exception;
 }

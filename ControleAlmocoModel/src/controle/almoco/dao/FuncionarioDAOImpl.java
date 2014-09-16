@@ -34,11 +34,22 @@ public class FuncionarioDAOImpl extends GenericDAOImpl<Funcionario> implements F
 		return super.findAll();
 	}
 	
+	public Funcionario update(Funcionario funcionario) throws Exception{
+		return super.update(funcionario);
+	}
+	
+	public void delete(Object id, Class<Funcionario> funcionario) throws Exception{
+		super.delete(id, funcionario);
+	}
+	
 	public Funcionario recuperarFuncionarioPorEmail(String email){
-		Query query = em.createQuery("SELECT funcionario FROM Funcionario funcionario WHERE funcionario.email = email");
-		query.setParameter("email", email);
+		Query query = null;
+		
+		query = em.createQuery("SELECT f FROM Funcionario f WHERE f.email =".concat("'").concat(email).concat("'"));
+		
+		List<Funcionario> lista = query.getResultList();
 
-		return (Funcionario) query.getSingleResult();
+		return lista.isEmpty()? null : lista.get(0);
 	}
 
 }

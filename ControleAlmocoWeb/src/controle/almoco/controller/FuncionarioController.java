@@ -13,6 +13,7 @@ import javax.inject.Named;
 import controle.almoco.form.FuncionarioForm;
 import controle.almoco.manager.FuncionarioManager;
 import controle.almoco.model.Funcionario;
+import controle.almoco.util.Constantes;
 
 @Named
 @RequestScoped
@@ -26,6 +27,7 @@ public class FuncionarioController {
  
     private static final String CRIAR_FUNCIONARIO = "criarFuncionario";
     private static final String LISTAR_FUNCIONARIOS = "listAllFuncionarios";
+    private static final String ALTERAR_FUNCIONARIO = "alterarFuncionario";
      
  
  
@@ -41,11 +43,56 @@ public class FuncionarioController {
     	try {
             funcionarioManager.save(funcionario);
         } catch (Exception e) {
-            sendErrorMessageToUser("Ocorreu um erro em nosso sistema, favor verificar com o administrador");
-            return null;
-        }       
- 
+            if(Constantes.EXCEPTION.USUARIO_EXISTENTE.equals(e.getMessage())){
+            	sendErrorMessageToUser("Usuário já registrado");            	
+            }else{
+            	sendErrorMessageToUser("Ocorreu um erro em nossos servidores. Por favor, contate o administrador do sistema.");            	
+            }
+        }        
+    	sendInfoMessageToUser("Funcionário Cadastrado com Sucesso.");  
         return LISTAR_FUNCIONARIOS;
+    }
+    
+    public String preparaEditarUsuario(Integer idFuncionario){
+    	Funcionario funcionario = funcionarioManager.findFuncionarioById(idFuncionario);
+    	funcionarioForm.setNome(funcionario.getNome());
+    	funcionarioForm.setFuncao(funcionario.getFuncao());
+    	funcionarioForm.setEmail(funcionario.getEmail());
+    	
+    	return ALTERAR_FUNCIONARIO;
+    }
+    
+    public String alterarFuncionario(){
+    	Funcionario funcionario = populaFuncionario();
+    	try {
+            funcionarioManager.update(funcionario);
+        } catch (Exception e) {
+            if(Constantes.EXCEPTION.USUARIO_EXISTENTE.equals(e.getMessage())){
+            	sendErrorMessageToUser("Usuário já registrado");            	
+            }else{
+            	sendErrorMessageToUser("Ocorreu um erro em nossos servidores. Por favor, contate o administrador do sistema.");            	
+            }
+        }        
+    	sendInfoMessageToUser("Funcionário Alterado com Sucesso.");  
+    	
+    	return LISTAR_FUNCIONARIOS;
+    }
+    
+    public String excluirFuncionario(Integer idFuncionario) throws Exception{
+    	//Funcionario funcionario = funcionarioManager.findFuncionarioById(idFuncionario);
+    	
+    	funcionarioManager.delete(idFuncionario, Funcionario.class);
+    	
+    	return null;
+    }
+    
+    public Funcionario populaFuncionario(){
+    	Funcionario funcionario = new Funcionario();
+        funcionario.setNome(funcionarioForm.getNome());
+        funcionario.setFuncao(funcionarioForm.getFuncao());
+        funcionario.setEmail(funcionarioForm.getEmail());
+        
+        return funcionario;
     }
  
     private void sendInfoMessageToUser(String message){
