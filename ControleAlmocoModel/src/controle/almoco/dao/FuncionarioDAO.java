@@ -9,6 +9,8 @@ public interface FuncionarioDAO extends GenericDAO<Funcionario>{
 
 	public abstract void save(Funcionario funcionario) throws Exception;
 	
+	public abstract Funcionario recuperarFuncionarioPorEmail(String email);
+	
 	
 
 }

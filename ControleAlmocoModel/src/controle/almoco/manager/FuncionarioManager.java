@@ -11,4 +11,6 @@ public interface FuncionarioManager {
 	public abstract void save(Funcionario funcionario) throws Exception;
 	
 	public abstract List<Funcionario> findAll();
+	
+	public abstract Funcionario recuperarFuncionarioPorEmail(String email);
 }
