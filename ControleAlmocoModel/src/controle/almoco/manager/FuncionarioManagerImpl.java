@@ -15,7 +15,7 @@ public class FuncionarioManagerImpl implements FuncionarioManager{
 	private FuncionarioDAO funcionarioDAO;
 	
 	@Override
-	public void save(Funcionario funcionario) {
+	public void save(Funcionario funcionario) throws Exception{
 		funcionarioDAO.save(funcionario);
 		
 	}

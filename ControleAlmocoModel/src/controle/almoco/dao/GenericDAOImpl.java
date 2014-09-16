@@ -4,16 +4,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.UserTransaction;
 
+@Stateless
 public abstract class GenericDAOImpl<T> implements GenericDAO<T>{
 	private final static String UNIT_NAME = "ControleAlmocoModel";
 	 
     @PersistenceContext(unitName = UNIT_NAME)
     private EntityManager em;
+    
+    @Resource
+    UserTransaction ut;
  
     private Class<T> entityClass;
  
@@ -21,8 +28,10 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T>{
         this.entityClass = entityClass;
     }
  
-    public void save(T entity) {
+    public void save(T entity) throws Exception{
+    	ut.begin();
         em.persist(entity);
+        ut.commit();
     }
  
     protected void delete(Object id, Class<T> classe) {

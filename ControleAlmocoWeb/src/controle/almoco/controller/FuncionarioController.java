@@ -2,12 +2,15 @@ package controle.almoco.controller;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
+
 import javax.inject.Named;
 
+import controle.almoco.form.FuncionarioForm;
 import controle.almoco.manager.FuncionarioManager;
 import controle.almoco.model.Funcionario;
 
@@ -17,37 +20,32 @@ public class FuncionarioController {
 
 	@Inject
     private FuncionarioManager funcionarioManager;
+	
+	@Inject
+	private FuncionarioForm funcionarioForm;
  
     private static final String CRIAR_FUNCIONARIO = "criarFuncionario";
+    private static final String LISTAR_FUNCIONARIOS = "listAllFuncionarios";
+     
  
-    private Funcionario funcionario;
- 
-    public Funcionario getFuncionario() {
- 
-        if(funcionario == null){
-            funcionario = new Funcionario();
-        }
- 
-        return funcionario;
-    }
- 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
  
     public List<Funcionario> getAllFuncionarios() {
         return funcionarioManager.findAll();
     }
  
     public String salvarFuncionario(){
-        try {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNome(funcionarioForm.getNome());
+        funcionario.setFuncao(funcionarioForm.getFuncao());
+        funcionario.setEmail(funcionarioForm.getEmail());
+    	try {
             funcionarioManager.save(funcionario);
         } catch (Exception e) {
-            sendErrorMessageToUser("Error. Check if the weight is above 0 or call the adm");
+            sendErrorMessageToUser("Ocorreu um erro em nosso sistema, favor verificar com o administrador");
             return null;
         }       
  
-        return "sucesso";
+        return LISTAR_FUNCIONARIOS;
     }
  
     private void sendInfoMessageToUser(String message){
@@ -64,4 +62,12 @@ public class FuncionarioController {
         FacesContext context = FacesContext.getCurrentInstance();
         return context;
     }
+
+	public FuncionarioForm getFuncionarioForm() {
+		return funcionarioForm;
+	}
+
+	public void setFuncionarioForm(FuncionarioForm funcionarioForm) {
+		this.funcionarioForm = funcionarioForm;
+	}
 }
