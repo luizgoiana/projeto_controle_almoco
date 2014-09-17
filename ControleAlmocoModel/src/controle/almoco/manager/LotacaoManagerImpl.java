@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import controle.almoco.dao.LotacaoDAO;
-import controle.almoco.model.Funcionario;
 import controle.almoco.model.Lotacao;
 
 @Stateless

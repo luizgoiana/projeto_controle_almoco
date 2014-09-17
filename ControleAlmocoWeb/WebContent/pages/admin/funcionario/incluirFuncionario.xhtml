@@ -21,6 +21,11 @@
 			
 			<h:outputLabel value="Email: " />
 			<h:inputText  value="#{funcionarioController.funcionarioForm.email}"  />
+			
+			<h:outputLabel value="Horário: " />
+			<h:selectOneMenu value="#{funcionarioController.funcionarioForm.idLotacaoSelecionada}">
+   				<f:selectItems value="#{funcionarioController.funcionarioForm.listaLotacoes}" var="lotacao" itemLabel="#{lotacao.descricao}"></f:selectItems>	   							
+			</h:selectOneMenu>
 		</h:panelGrid>
 		<h:panelGrid columns="2">
 			<h:commandButton value="#{msgs.btnIncluir}" action="#{funcionarioController.salvarFuncionario()}" />

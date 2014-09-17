@@ -1,7 +1,10 @@
 package controle.almoco.controller;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -11,15 +14,24 @@ import javax.servlet.http.HttpSession;
 
 import controle.almoco.form.FuncionarioForm;
 import controle.almoco.manager.FuncionarioManager;
+import controle.almoco.manager.LotacaoManager;
 import controle.almoco.model.Funcionario;
 import controle.almoco.util.Constantes;
 
 @Named
 @RequestScoped
-public class FuncionarioController {
+public class FuncionarioController implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Inject
     private FuncionarioManager funcionarioManager;
+	
+	@Inject
+	private LotacaoManager lotacaoManager;
 	
 	@Inject
 	private FuncionarioForm funcionarioForm;
@@ -33,12 +45,19 @@ public class FuncionarioController {
     public List<Funcionario> getAllFuncionarios() {
         return funcionarioManager.findAll();
     }
+    
+    @PostConstruct
+    public void populaListaLotacao(){
+    	funcionarioForm.setListaLotacoes(lotacaoManager.findAll());
+    }
  
     public String salvarFuncionario(){
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(funcionarioForm.getNome());
         funcionario.setFuncao(funcionarioForm.getFuncao());
         funcionario.setEmail(funcionarioForm.getEmail());
+        
+        //funcionario.setLotacao(lotacaoManager.);
     	try {
             funcionarioManager.save(funcionario);
         } catch (Exception e) {
