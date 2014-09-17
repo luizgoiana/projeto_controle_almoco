@@ -24,7 +24,7 @@
 			
 			<h:outputLabel value="Horário: " />
 			<h:selectOneMenu value="#{funcionarioController.funcionarioForm.idLotacaoSelecionada}">
-   				<f:selectItems value="#{funcionarioController.funcionarioForm.listaLotacoes}" var="lotacao" itemLabel="#{lotacao.descricao}"></f:selectItems>	   							
+   				<f:selectItems value="#{funcionarioController.funcionarioForm.listaLotacoes}" var="lotacao" itemLabel="#{lotacao.descricao}" itemValue="#{lotacao.id}"></f:selectItems>	   							
 			</h:selectOneMenu>
 		</h:panelGrid>
 		<h:panelGrid columns="2">

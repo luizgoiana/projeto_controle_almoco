@@ -56,6 +56,7 @@ public class FuncionarioController implements Serializable{
         funcionario.setNome(funcionarioForm.getNome());
         funcionario.setFuncao(funcionarioForm.getFuncao());
         funcionario.setEmail(funcionarioForm.getEmail());
+        //funcionario.setLotacao();
         
         //funcionario.setLotacao(lotacaoManager.);
     	try {

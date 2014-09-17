@@ -1,71 +1,46 @@
 package controle.almoco.util;
 
-import java.lang.reflect.Field;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.persistence.Id;
+import javax.faces.convert.FacesConverter;
 
+@FacesConverter("entityConverter")
 public class EntityConverter implements Converter{
-	@Override
-	public Object getAsObject(FacesContext ctx, UIComponent component,
-			String value) {
-		if (value != null) {
-			return component.getAttributes().get(value);
-
-		}
-
-		return null;
-	}
-
-	@Override
-	public String getAsString(FacesContext ctx, UIComponent component,
-			Object obj) {
-		if (obj != null && !"".equals(obj)) {
-			String id;
-			try {
-				id = this.getId(getClazz(ctx, component), obj);
-				if (id == null) {
-					id = "";
-				}
-				id = id.trim();
-				component.getAttributes().put(id,
-						getClazz(ctx, component).cast(obj));
-				return id;
-			} catch (SecurityException e) {
-				
-			} catch (IllegalArgumentException e) {
-				
-			} catch (NoSuchFieldException e) {
-				
-			} catch (IllegalAccessException e) {
-				
-			}
-		}
-		return null;
-	}
-
-	private Class<?> getClazz(FacesContext facesContext, UIComponent component) {
-		return component.getValueExpression("value").getType(
-				facesContext.getELContext());
-	}
-
-	public String getId(Class<?> clazz, Object obj) throws SecurityException,
-			NoSuchFieldException, IllegalArgumentException,
-			IllegalAccessException {
-		for (Field field : clazz.getDeclaredFields()) {
-			if ((field.getAnnotation(Id.class)) != null) {
-				Field privateField = clazz.getDeclaredField(field.getName());
-				privateField.setAccessible(true);
-				if (privateField.get(clazz.cast(obj)) != null) {
-					return (String) field.getType()
-							.cast(privateField.get(clazz.cast(obj))).toString();
-				} else {
-					return null;
-				}
-			}
-		}
-		return null;
-	}
+	public Object getAsObject(FacesContext ctx, UIComponent component, String value) {  
+        if (value != null) {  
+            return this.getAttributesFrom(component).get(value);  
+        }  
+        return null;  
+    }  
+  
+    public String getAsString(FacesContext ctx, UIComponent component, Object value) {  
+  
+        if (value != null  
+                && !"".equals(value)) {  
+  
+            BaseEntity entity = (BaseEntity) value;  
+  
+            // adiciona item como atributo do componente  
+            this.addAttribute(component, entity);  
+  
+            Integer codigo = entity.getId();  
+            if (codigo != null) {  
+                return String.valueOf(codigo);  
+            }  
+        }  
+  
+        return (String) value;  
+    }  
+  
+    protected void addAttribute(UIComponent component, BaseEntity o) {  
+        String key = o.getId().toString(); // codigo da empresa como chave neste caso  
+        this.getAttributesFrom(component).put(key, o);  
+    }  
+  
+    protected Map<String, Object> getAttributesFrom(UIComponent component) {  
+        return component.getAttributes();  
+    }  
 }
