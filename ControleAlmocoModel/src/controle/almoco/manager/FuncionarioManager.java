@@ -16,7 +16,7 @@ public interface FuncionarioManager {
 	
 	public abstract Funcionario findFuncionarioById(int idFuncionario);
 	
-	public abstract void update(Funcionario funcionario) throws Exception;
+	public abstract void update(Funcionario funcionario, String emailAnterior) throws Exception;
 	
 	public abstract void delete(Object id, Class<Funcionario> funcionario) throws Exception;
 }

@@ -56,17 +56,21 @@ public class FuncionarioController {
     	Funcionario funcionario = funcionarioManager.findFuncionarioById(idFuncionario);
     	HttpSession session = (HttpSession) getContext().getExternalContext().getSession(false);
     	session.setAttribute("idFuncionario", idFuncionario);
+    	session.setAttribute("emailAnterior",funcionario.getEmail());
     	funcionarioForm.setNome(funcionario.getNome());
     	funcionarioForm.setFuncao(funcionario.getFuncao());
     	funcionarioForm.setEmail(funcionario.getEmail());
+
     	
     	return ALTERAR_FUNCIONARIO;
     }
     
     public String alterarFuncionario(){
     	Funcionario funcionario = populaFuncionario();
+    	HttpSession session = (HttpSession) getContext().getExternalContext().getSession(false);
     	try {
-            funcionarioManager.update(funcionario);
+    		
+            funcionarioManager.update(funcionario, session.getAttribute("emailAnterior").toString());
         } catch (Exception e) {
             if(Constantes.EXCEPTION.USUARIO_EXISTENTE.equals(e.getMessage())){
             	sendErrorMessageToUser("Usuário já registrado");            	

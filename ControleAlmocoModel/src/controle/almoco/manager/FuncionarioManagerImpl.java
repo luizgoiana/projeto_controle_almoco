@@ -45,8 +45,14 @@ public class FuncionarioManagerImpl implements FuncionarioManager{
 	}
 
 	@Override
-	public void update(Funcionario funcionario) throws Exception {
-		funcionarioDAO.update(funcionario);
+	public void update(Funcionario funcionario, String emailAnterior) throws Exception {
+		Funcionario funcionarioExistente = new Funcionario();
+		funcionarioExistente = funcionarioDAO.recuperarFuncionarioPorEmail(funcionario.getEmail());
+		if (!Util.validaObjeto(funcionarioExistente) || funcionario.getEmail().equals(emailAnterior)){
+			funcionarioDAO.update(funcionario);
+		}else{
+			throw new Exception(Constantes.EXCEPTION.USUARIO_EXISTENTE);
+		}
 		
 	}
 
