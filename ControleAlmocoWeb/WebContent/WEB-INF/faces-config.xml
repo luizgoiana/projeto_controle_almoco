@@ -11,6 +11,13 @@
 			<to-view-id>/pages/admin/funcionario/listarFuncionarios.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+    <navigation-rule>
+		<navigation-case>
+			<from-outcome>listAllCozinhas</from-outcome>
+			<to-view-id>/pages/admin/cozinha/listarCozinhas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
     
     <application>
 		<resource-bundle>

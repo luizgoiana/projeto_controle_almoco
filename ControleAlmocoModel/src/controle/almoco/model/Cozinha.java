@@ -23,11 +23,22 @@ public class Cozinha implements Serializable{
 	@Column(name = "ID_COZINHA")
 	private Integer id;
 	
+	@Column(name = "NOME")
+	private String nome;
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
 
 }
