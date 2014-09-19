@@ -26,16 +26,16 @@ public class FuncionarioDAOImpl extends GenericDAOImpl<Funcionario> implements F
 		super(Funcionario.class);
 	}
 	
-	public void save(Funcionario funcionario) throws Exception {
-        super.save(funcionario);
+	public Funcionario save(Funcionario funcionario) throws Exception {
+        return super.save(funcionario);
 	}
 	
 	public List<Funcionario> findAll(){
 		return super.findAll();
 	}
 	
-	public void update(Funcionario funcionario) throws Exception{
-		super.update(funcionario);
+	public Funcionario update(Funcionario funcionario) throws Exception{
+		return super.update(funcionario);
 	}
 	
 	public void delete(Object id, Class<Funcionario> funcionario) throws Exception{

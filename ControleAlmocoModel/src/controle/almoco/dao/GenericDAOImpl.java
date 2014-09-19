@@ -28,10 +28,11 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T>{
         this.entityClass = entityClass;
     }
  
-    public void save(T entity) throws Exception{
+    public T save(T entity) throws Exception{
     	ut.begin();
         em.persist(entity);
         ut.commit();
+        return entity;
     }
  
     public void delete(Object id, Class<T> classe) throws Exception {
@@ -42,10 +43,11 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T>{
         ut.commit();
     }
  
-    public void update(T entity) throws Exception{
+    public T update(T entity) throws Exception{
         ut.begin();
     	em.merge(entity);
     	ut.commit();
+    	return entity;
     }
  
     public T find(int entityID) {

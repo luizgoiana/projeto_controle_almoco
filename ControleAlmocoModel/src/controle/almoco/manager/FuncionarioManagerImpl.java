@@ -6,7 +6,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import controle.almoco.dao.FuncionarioDAO;
+import controle.almoco.dao.LotacaoDAO;
 import controle.almoco.model.Funcionario;
+import controle.almoco.model.Lotacao;
 import controle.almoco.util.Constantes;
 import controle.almoco.util.Util;
 
@@ -16,12 +18,21 @@ public class FuncionarioManagerImpl implements FuncionarioManager{
 	@Inject
 	private FuncionarioDAO funcionarioDAO;
 	
+	@Inject
+	private LotacaoDAO lotacaoDAO;
+	
 	@Override
 	public void save(Funcionario funcionario) throws Exception{
 		Funcionario funcionarioExistente = new Funcionario();
 		funcionarioExistente = funcionarioDAO.recuperarFuncionarioPorEmail(funcionario.getEmail());
 		if(!Util.validaObjeto(funcionarioExistente)){
-			funcionarioDAO.save(funcionario);			
+			if (funcionario.getId()==null && funcionario.getLotacao()!=null){
+				Lotacao lotacao = lotacaoDAO.find(funcionario.getLotacao().getId());
+				funcionario.setLotacao(null);
+				funcionarioDAO.save(funcionario);	
+				funcionario.setLotacao(lotacao);
+				funcionarioDAO.update(funcionario);
+			}
 		}else{
 			throw new Exception(Constantes.EXCEPTION.USUARIO_EXISTENTE);
 		}

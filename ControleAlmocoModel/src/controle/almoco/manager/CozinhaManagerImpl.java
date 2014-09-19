@@ -15,12 +15,13 @@ public class CozinhaManagerImpl implements CozinhaManager{
 	private CozinhaDAO cozinhaDAO;
 	
 	@Override
-	public void save(Cozinha cozinha){
+	public Cozinha save(Cozinha cozinha){
 		try {
-			cozinhaDAO.save(cozinha);
+			return cozinhaDAO.save(cozinha);
 		} catch (Exception e) {
 			
 		}	
+		return null;
 	}
 
 	@Override
@@ -34,8 +35,8 @@ public class CozinhaManagerImpl implements CozinhaManager{
 	}
 
 	@Override
-	public void update(Cozinha cozinha) throws Exception {
-		cozinhaDAO.update(cozinha);
+	public Cozinha update(Cozinha cozinha) throws Exception {
+		return cozinhaDAO.update(cozinha);
 		
 	}
 

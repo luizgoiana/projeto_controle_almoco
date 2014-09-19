@@ -35,24 +35,8 @@
 				
 				#{lotacao.cozinha.id}
 			</h:column>
-			<!-- 
-			<h:column>
-				<h:panelGrid columns="3">
-					 Always save the id as hidden when you use a request scope MB -->
-					<h:inputHidden value="#{funcionario.id}" />
-					
-					<!--<h:commandButton action="#{dogMB.updateDogStart()}" value="#{msgs.update}" rendered="#{userMB.userAdmin}" >
-						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
-					</h:commandButton>
-					<h:commandButton action="#{dogMB.deleteDogStart()}" value="#{msgs.delete}" rendered="#{userMB.userAdmin}" >
-						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
-					</h:commandButton>
-				</h:panelGrid>
-			</h:column>
-			 -->
+			
 		</h:dataTable>
-		<!-- This button is displayed to the user, just to you see the error msg  -->
-		<!-- <h:commandButton action="createDog" value="#{msgs.create} #{msgs.dog}" /> -->
 	</h:form>
 </h:body>
 </html>

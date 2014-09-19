@@ -5,6 +5,10 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
     
+    <welcome-file-list>
+		<welcome-file>/pages/index.xhtml</welcome-file>
+	</welcome-file-list>
+    
     <navigation-rule>
 		<navigation-case>
 			<from-outcome>listAllFuncionarios</from-outcome>
@@ -16,6 +20,13 @@
 		<navigation-case>
 			<from-outcome>listAllCozinhas</from-outcome>
 			<to-view-id>/pages/admin/cozinha/listarCozinhas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>listAllLotacoes</from-outcome>
+			<to-view-id>/pages/admin/lotacao/listarLotacao.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
     

@@ -25,16 +25,16 @@ public class CozinhaDAOImpl extends GenericDAOImpl<Cozinha> implements CozinhaDA
 		super(Cozinha.class);
 	}
 	
-	public void save(Cozinha cozinha) throws Exception {
-        super.save(cozinha);
+	public Cozinha save(Cozinha cozinha) throws Exception {
+        return super.save(cozinha);
 	}
 	
 	public List<Cozinha> findAll(){
 		return super.findAll();
 	}
 	
-	public void update(Cozinha cozinha) throws Exception{
-		super.update(cozinha);
+	public Cozinha update(Cozinha cozinha) throws Exception{
+		return super.update(cozinha);
 	}
 	
 	public void delete(Object id, Class<Cozinha> cozinha) throws Exception{
